@@ -1,16 +1,22 @@
-## Hi there 👋
+# OpenFinder
 
-<!--
-**theopenfinder/theopenfinder** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+OpenFinder is a discovery platform for open-source software.
 
-Here are some ideas to get you started:
+Our goal is to make it easy for anyone to find powerful open-source tools across categories like development, design, productivity, privacy, and AI.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Launch plan
+
+The first version of OpenFinder will include:
+
+- 300 curated open-source tools
+- clear categories
+- searchable listings
+- beginner-friendly descriptions
+
+## Website
+
+https://theopenfinder.org
+
+## Status
+
+Currently in development.
