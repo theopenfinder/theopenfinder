@@ -7,7 +7,7 @@ Productivity,collaboration
 Productivity,bookmarking
 Productivity,knowledge-base
 
-Development,code-editors
+Development,code-editing
 Development,version-control
 Development,api-tools
 Development,testing
@@ -25,9 +25,9 @@ Media,audio-editing
 Media,music-production
 Media,screen-recording
 Media,streaming
-Media,playback
+Media,media-players
 
-AI,llm-clients
+AI,llm-tools
 AI,local-ai
 AI,model-management
 AI,ai-automation
@@ -50,7 +50,7 @@ Networking,servers
 Networking,dns
 Networking,remote-access
 Networking,proxies
-Networking,communication
+Networking,network-communication
 
 Data,databases
 Data,data-visualization
