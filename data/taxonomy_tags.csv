@@ -31,12 +31,30 @@ synchronization,functional
 cross-platform,functional
 
 beginner-friendly,ux
-intermediate,ux
-advanced,ux
 
 markdown,domain
 photo-management,domain
-password-management,domain
+password-manager,domain
 note-taking,domain
-video-processing,domain
 music-production,domain
+video-editing,domain
+audio-editing,domain
+screen-recording,domain
+streaming,domain
+media-player,domain
+document-editing,domain
+spreadsheet-editing,domain
+presentation-editing,domain
+knowledge-base,domain
+task-management,domain
+image-editing,domain
+vector-graphics,domain
+3d-modeling,domain
+animation,domain
+illustration,domain
+llm,domain
+image-generation,domain
+speech-to-text,domain
+text-to-speech,domain
+file-management,domain
+secure-messaging,domain
