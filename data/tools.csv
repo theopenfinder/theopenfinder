@@ -1,6 +1,6 @@
-id,name,category,description,website,github,license,platforms,tags,self_hosted,year_started
-gimp,GIMP,Design,"Open source image editor similar to Photoshop",https://gimp.org,https://github.com/GNOME/gimp,GPL,Windows|Mac|Linux,image-editing|design,false,1996
-blender,Blender,Design,"3D modeling and animation suite",https://blender.org,https://github.com/blender/blender,GPL,Windows|Mac|Linux,3d|animation,false,1998
-obs,OBS Studio,Media,"Open source video recording and streaming software",https://obsproject.com,https://github.com/obsproject/obs-studio,GPL,Windows|Mac|Linux,streaming|recording,false,2012
-libreoffice,LibreOffice,Productivity,"Open source office suite",https://libreoffice.org,https://github.com/LibreOffice/core,MPL,Windows|Mac|Linux,documents|office,false,2010
-keepassxc,KeePassXC,Security,"Open source password manager",https://keepassxc.org,https://github.com/keepassxreboot/keepassxc,GPL,Windows|Mac|Linux,passwords|security,true,2017
+id,name,category,subcategory,description,website,github,license,platforms,tags,difficulty,self_hosted,year_started
+gimp,GIMP,Design,image-editing,"Open source image editor similar to Photoshop",https://gimp.org,https://github.com/GNOME/gimp,GPL,windows|macos|linux,desktop|cross-platform|image-editing,intermediate,false,1996
+blender,Blender,Design,3d-modeling,"Open source 3D modeling and animation suite",https://blender.org,https://github.com/blender/blender,GPL,windows|macos|linux,desktop|cross-platform|3d-modeling|animation,advanced,false,1998
+obs,OBS Studio,Media,streaming,"Open source video recording and live streaming software",https://obsproject.com,https://github.com/obsproject/obs-studio,GPL,windows|macos|linux,desktop|cross-platform|streaming|screen-recording,intermediate,false,2012
+libreoffice,LibreOffice,Productivity,document-editing,"Open source office suite for documents, spreadsheets, and presentations",https://libreoffice.org,https://github.com/LibreOffice/core,MPL,windows|macos|linux,desktop|cross-platform|offline-capable|beginner-friendly|document-editing|spreadsheet-editing|presentation-editing,beginner,false,2010
+keepassxc,KeePassXC,Security,password-managers,"Open source password manager for securely storing credentials locally",https://keepassxc.org,https://github.com/keepassxreboot/keepassxc,GPL,windows|macos|linux,desktop|cross-platform|encrypted|offline-capable|privacy-focused|password-manager,intermediate,false,2017
