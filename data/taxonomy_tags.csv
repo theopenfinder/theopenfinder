@@ -41,7 +41,6 @@ minimalist,ux
 customizable,ux
 ,
 markdown,domain
-animation,domain
 llm,domain
 speech-to-text,domain
 text-to-speech,domain
@@ -49,4 +48,3 @@ secure-messaging,domain
 email,domain
 photo-management,domain
 knowledge-management,domain
-calendar,domain
