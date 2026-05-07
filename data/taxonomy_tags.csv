@@ -23,7 +23,6 @@ api,technical
 extensible,technical
 plugin-based,technical
 lightweight,technical
-server-based,technical
 ,
 real-time,functional
 collaborative,functional
@@ -48,3 +47,7 @@ secure-messaging,domain
 email,domain
 photo-management,domain
 knowledge-management,domain
+file-management,domain
+database,domain
+version-control,domain
+monitoring,domain
