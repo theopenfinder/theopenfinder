@@ -36,6 +36,17 @@ body {
   min-height: 100vh;
 }
 
+/* Nav logo — inverted so black wordmark reads white on dark backgrounds */
+.navLogo {
+  height: 39px;
+  width: auto;
+  display: block;
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  margin-left: -15px;
+}
+
 /* Full-screen diffuse glass layer — sits above the ASCII canvas (z:-1) and
    below all page content (z:1). Creates the translucent, slightly frosted look. */
 body::before {

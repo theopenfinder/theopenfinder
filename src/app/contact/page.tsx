@@ -55,11 +55,19 @@ const SOCIALS = [
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [sentTool, setSentTool] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 3000);
+    (e.target as HTMLFormElement).reset();
+  }
+
+  function handleToolSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSentTool(true);
+    setTimeout(() => setSentTool(false), 3000);
     (e.target as HTMLFormElement).reset();
   }
 
@@ -72,7 +80,7 @@ export default function ContactPage() {
         {/* ── Navigation ───────────────────────────────────────── */}
         <nav className={homeStyles.nav}>
           <div className={homeStyles.navLeft}>
-            <a href="/" className={homeStyles.navBrand}>OpenFinder</a>
+            <a href="/" className={homeStyles.navBrand}><img src="/logo1-final.png" alt="OpenFinder" className="navLogo" /></a>
           </div>
           <div className={homeStyles.navLinks}>
             <a href="/"           className={homeStyles.navLink}>home</a>
@@ -92,67 +100,132 @@ export default function ContactPage() {
         {/* ── Body ────────────────────────────────────────────── */}
         <div className={styles.bodyGrid}>
 
-          {/* Form panel */}
-          <form onSubmit={handleSubmit}>
-            <div className={styles.formPanel}>
-              <div className={styles.formPanelHeader}>
-                <span className={styles.formPanelTitle}>message</span>
-              </div>
-              <div className={styles.formBody}>
+          {/* Forms column */}
+          <div className={styles.formsColumn}>
 
-                <div className={styles.formRow}>
+            {/* Message form */}
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formPanel}>
+                <div className={styles.formPanelHeader}>
+                  <span className={styles.formPanelTitle}>message</span>
+                </div>
+                <div className={styles.formBody}>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel} htmlFor="cf-name">Name</label>
+                      <input
+                        className={styles.formInput}
+                        id="cf-name"
+                        name="name"
+                        type="text"
+                        placeholder="your name (optional)"
+                        autoComplete="name"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel} htmlFor="cf-email">Email</label>
+                      <input
+                        className={styles.formInput}
+                        id="cf-email"
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                      />
+                    </div>
+                  </div>
+
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="cf-name">Name</label>
+                    <label className={styles.formLabel} htmlFor="cf-subject">Subject</label>
                     <input
                       className={styles.formInput}
-                      id="cf-name"
-                      name="name"
+                      id="cf-subject"
+                      name="subject"
                       type="text"
-                      placeholder="your name (optional)"
-                      autoComplete="name"
+                      placeholder="feature suggestion, feedback, bug report…"
                     />
                   </div>
+
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="cf-email">Email</label>
+                    <label className={styles.formLabel} htmlFor="cf-message">Text</label>
+                    <textarea
+                      className={styles.formTextarea}
+                      id="cf-message"
+                      name="message"
+                      placeholder="what's on your mind…"
+                    />
+                  </div>
+
+                  <button type="submit" className={styles.submitBtn}>
+                    {sent ? 'sent ✓' : 'send →'}
+                  </button>
+
+                </div>
+              </div>
+            </form>
+
+            {/* Tool submissions form */}
+            <form onSubmit={handleToolSubmit}>
+              <div className={styles.formPanel}>
+                <div className={styles.formPanelHeader}>
+                  <span className={styles.formPanelTitle}>tool submissions</span>
+                </div>
+                <div className={styles.formBody}>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel} htmlFor="ts-tool">Tool Name</label>
+                      <input
+                        className={styles.formInput}
+                        id="ts-tool"
+                        name="tool"
+                        type="text"
+                        placeholder="e.g. Jellyfin"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel} htmlFor="ts-url">Repository / URL</label>
+                      <input
+                        className={styles.formInput}
+                        id="ts-url"
+                        name="url"
+                        type="url"
+                        placeholder="https://github.com/…"
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel} htmlFor="ts-category">Category</label>
                     <input
                       className={styles.formInput}
-                      id="cf-email"
-                      name="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      autoComplete="email"
+                      id="ts-category"
+                      name="category"
+                      type="text"
+                      placeholder="e.g. Media, Dev Tools, Security…"
                     />
                   </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel} htmlFor="ts-description">Description</label>
+                    <textarea
+                      className={styles.formTextarea}
+                      id="ts-description"
+                      name="description"
+                      placeholder="briefly describe what the tool does and why it belongs in the directory…"
+                    />
+                  </div>
+
+                  <button type="submit" className={styles.submitBtn}>
+                    {sentTool ? 'submitted ✓' : 'submit →'}
+                  </button>
+
                 </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel} htmlFor="cf-subject">Subject</label>
-                  <input
-                    className={styles.formInput}
-                    id="cf-subject"
-                    name="subject"
-                    type="text"
-                    placeholder="tool suggestion, feedback, bug report…"
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel} htmlFor="cf-message">Text</label>
-                  <textarea
-                    className={styles.formTextarea}
-                    id="cf-message"
-                    name="message"
-                    placeholder="what's on your mind…"
-                  />
-                </div>
-
-                <button type="submit" className={styles.submitBtn}>
-                  {sent ? 'sent ✓' : 'send →'}
-                </button>
-
               </div>
-            </div>
-          </form>
+            </form>
+
+          </div>
 
           {/* Sidebar */}
           <aside className={styles.sidebar}>

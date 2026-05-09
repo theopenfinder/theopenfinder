@@ -62,7 +62,7 @@ export default async function ToolsPage() {
         {/* ── Navigation ─────────────────────────────────────────── */}
         <nav className={styles.nav}>
           <div className={styles.navLeft}>
-            <a href="/" className={styles.navBrand}>OpenFinder</a>
+            <a href="/" className={styles.navBrand}><img src="/logo1-final.png" alt="OpenFinder" className="navLogo" /></a>
           </div>
           <div className={styles.navLinks}>
             <a href="/"           className={styles.navLink}>home</a>

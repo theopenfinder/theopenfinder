@@ -36,6 +36,13 @@
   margin-bottom: clamp(4rem, 8vw, 7rem);
 }
 
+/* Forms column: stacks message + tool submissions vertically */
+.formsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /* ── Form panel ──────────────────────────────────────────────────── */
 .formPanel {
   background: #141414;

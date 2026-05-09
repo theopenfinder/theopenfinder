@@ -78,7 +78,7 @@ export default async function CategoriesPage() {
 
         {/* ── Navigation ─────────────────────────────────────────── */}
         <nav className={styles.nav}>
-          <a href="/" className={styles.navBrand}>OpenFinder</a>
+          <a href="/" className={styles.navBrand}><img src="/logo1-final.png" alt="OpenFinder" className="navLogo" /></a>
           <div className={styles.navLinks}>
             <a href="/"           className={styles.navLink}>home</a>
             <a href="/tools"      className={styles.navLink}>tools</a>

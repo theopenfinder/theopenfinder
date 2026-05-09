@@ -82,7 +82,7 @@ export default function GuidesPage() {
         {/* ── Navigation ───────────────────────────────────────── */}
         <nav className={homeStyles.nav}>
           <div className={homeStyles.navLeft}>
-            <a href="/" className={homeStyles.navBrand}>OpenFinder</a>
+            <a href="/" className={homeStyles.navBrand}><img src="/logo1-final.png" alt="OpenFinder" className="navLogo" /></a>
           </div>
           <div className={homeStyles.navLinks}>
             <a href="/"           className={homeStyles.navLink}>home</a>
