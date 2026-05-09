@@ -1,0 +1,169 @@
+/* ── Wrapper ──────────────────────────────────────────────────────── */
+.wrapper {
+  position: relative;
+}
+
+/* ── Scroll track ─────────────────────────────────────────────────── */
+.track {
+  display: flex;
+  gap: 1px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+  /* border-top removed — outer .panel provides the frame */
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Guide card ───────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 252px;
+  gap: 0.875rem;
+  padding: 1.375rem 1.25rem;
+  background: transparent;
+  text-decoration: none;
+  border-right: 1px dashed rgba(255, 255, 255, 0.07);
+  scroll-snap-align: start;
+  position: relative;
+  transition: background 0.18s ease;
+  min-height: 220px;
+  border-radius: 0;
+}
+
+.card:last-child {
+  border-right: none;
+}
+
+.card:hover {
+  background: rgba(210, 190, 155, 0.03);
+}
+
+/* ── Type label ───────────────────────────────────────────────────── */
+.badge {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+  align-self: flex-start;
+  /* No border, no background — plain text label */
+}
+
+/* ── Title ────────────────────────────────────────────────────────── */
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  line-height: 1.2;
+  transition: color 0.15s ease;
+}
+
+.card:hover .title {
+  color: var(--color-brand-500);
+}
+
+/* ── Description ──────────────────────────────────────────────────── */
+.desc {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+  color: var(--color-neutral-400);
+  flex: 1;
+}
+
+/* ── Tool tags — plain inline text ────────────────────────────────── */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: auto;
+}
+
+.tool {
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--color-neutral-500);
+  background: none;
+  padding: 0;
+}
+
+/* dot separator between tools via pseudo-element */
+.tool + .tool::before {
+  content: ' · ';
+  color: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Card arrow ───────────────────────────────────────────────────── */
+.arrow {
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  color: var(--color-neutral-500);
+  margin-top: 0.5rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+  opacity: 0;
+}
+
+.card:hover .arrow {
+  color: var(--color-brand-500);
+  transform: translateX(3px);
+  opacity: 1;
+}
+
+/* ── Back / Forward nav buttons — side overlays ──────────────────── */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: rgba(10, 10, 10, 0.85);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--font-editorial);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+}
+
+.navBtnLeft  { left:  0.75rem; }
+.navBtnRight { right: 0.75rem; }
+
+.navBtn:hover {
+  color: var(--color-brand-500);
+  border-color: var(--color-brand-600);
+}
+
+.navBtn:focus-visible {
+  outline: 1px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+.navBtn:active {
+  background: rgba(210, 190, 155, 0.08);
+}
+
+.navBtnHidden {
+  opacity: 0;
+  pointer-events: none;
+}

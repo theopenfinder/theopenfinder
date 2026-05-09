@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables — never commit secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+
+# Local dev / Claude helper files
+temporary screenshots/
+screenshot.mjs
+screenshot_scroll.mjs
+serve.mjs

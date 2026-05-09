@@ -1,0 +1,50 @@
+:root {
+  --color-black:      rgb(0,   0,   0);
+  --color-white:      rgb(255, 255, 255);
+  --color-brand-500:  rgb(210, 190, 155);
+  --color-brand-600:  rgb(175, 153, 115);
+  --color-neutral-400: rgb(163, 163, 163);
+  --color-neutral-500: rgb(122, 122, 122);
+  --color-neutral-700: rgb(56,  56,  56);
+  --color-neutral-800: rgb(29,  29,  29);
+
+  --font-primary:   var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-mono:      "Courier New", Courier, monospace;
+  --font-editorial: "Consolas", "Menlo", "Lucida Console", "Courier New", monospace;
+  --font-serif:     "Times New Roman", "Georgia", Times, serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: clamp(14px, 1.25vw, 16px);
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizespeed;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Full-screen diffuse glass layer — sits above the ASCII canvas (z:-1) and
+   below all page content (z:1). Creates the translucent, slightly frosted look. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(8, 8, 8, 0.62);
+  backdrop-filter: blur(80px) saturate(1);
+  -webkit-backdrop-filter: blur(80px) saturate(1);
+  pointer-events: none;
+}

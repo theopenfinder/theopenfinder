@@ -1,0 +1,379 @@
+/* ── Page wrapper ─────────────────────────────────────────────────── */
+.siteWrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 5rem) 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Navigation ─────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0;
+}
+
+.navBrand {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navLink {
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--color-neutral-400);
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover { color: var(--color-white); }
+
+.navLinkActive { color: var(--color-brand-500); }
+
+/* ── Breadcrumb ──────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: 2.5rem;
+}
+
+.breadcrumbLink {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.breadcrumbLink:hover { color: var(--color-brand-500); }
+
+.breadcrumbSep {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.breadcrumbCurrent {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+/* ── Layout: two-column ──────────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: clamp(3rem, 5vw, 5rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Left: main content ──────────────────────────────────────────── */
+.main {}
+
+/* Tool name heading */
+.name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  margin-bottom: 1.75rem;
+}
+
+/* Description */
+.description {
+  font-family: var(--font-serif);
+  font-size: clamp(0.9375rem, 1.15vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--color-neutral-400);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+
+/* ── CTA links ───────────────────────────────────────────────────── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-black);
+  background: var(--color-brand-500);
+  text-decoration: none;
+  padding: 0.5rem 1.125rem;
+  border: 1px solid var(--color-brand-500);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ctaBtn:hover {
+  background: transparent;
+  color: var(--color-brand-500);
+}
+
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-neutral-400);
+  text-decoration: none;
+  padding: 0.5rem 1.125rem;
+  border: 1px solid var(--color-neutral-700);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ctaGhost:hover {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Divider ─────────────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-neutral-700);
+  margin-bottom: 2.5rem;
+}
+
+/* ── Tags section ────────────────────────────────────────────────── */
+.sectionLabel {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.22);
+  margin-bottom: 0.75rem;
+}
+
+.tagCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-500);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0.2rem 0.55rem;
+}
+
+/* ── Right: metadata panel ───────────────────────────────────────── */
+.sidebar {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px #030303,
+    0 16px 48px rgba(0, 0, 0, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 2rem;
+}
+
+.sidebarHeader {
+  padding: 0.6rem 1rem;
+  background: #0b0b0b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.sidebarTitle {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.metaList {
+  padding: 0.25rem 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.metaRow:last-child {
+  border-bottom: none;
+}
+
+.metaKey {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.metaVal {
+  font-family: var(--font-editorial);
+  font-size: 0.5875rem;
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-400);
+  text-align: right;
+}
+
+.metaValBrand {
+  font-family: var(--font-editorial);
+  font-size: 0.5875rem;
+  letter-spacing: -0.01em;
+  color: var(--color-brand-500);
+  text-align: right;
+}
+
+.metaBadge {
+  display: inline-block;
+  font-family: var(--font-editorial);
+  font-size: 0.4875rem;
+  letter-spacing: 0.02em;
+  color: var(--color-brand-600);
+  border: 1px solid rgba(175, 153, 115, 0.35);
+  padding: 0.1rem 0.35rem;
+}
+
+.metaBool {
+  display: inline-block;
+  font-family: var(--font-editorial);
+  font-size: 0.4875rem;
+  letter-spacing: 0.02em;
+  color: rgba(210, 190, 155, 0.55);
+  border: 1px solid rgba(210, 190, 155, 0.15);
+  padding: 0.1rem 0.35rem;
+}
+
+.metaPlatforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: flex-end;
+}
+
+.metaPlatform {
+  font-family: var(--font-editorial);
+  font-size: 0.4875rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0.1rem 0.35rem;
+}
+
+.metaCategories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.metaCategory {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  color: var(--color-neutral-500);
+}
+
+.metaCategoryParent {
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.5rem;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin-top: 5rem;
+  border-top: 1px solid var(--color-neutral-700);
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.footerBrand {
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  letter-spacing: -0.06em;
+  color: var(--color-white);
+}
+
+.footerTagline {
+  font-family: var(--font-primary);
+  font-size: 0.6875rem;
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-500);
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footerLink {
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  letter-spacing: -0.02em;
+  color: var(--color-neutral-500);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footerLink:hover { color: var(--color-white); }
