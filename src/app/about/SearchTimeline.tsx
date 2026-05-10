@@ -81,7 +81,7 @@ export default function SearchTimeline() {
       {NODES.map((node, i) => (
         <div key={node.type} className={styles.stCol}>
 
-          {/* Top branch: feature callout — placed in grid row 1 */}
+          {/* Top branch: feature callout — placed in grid row 1 (desktop only) */}
           <div
             className={styles.stTopBranch}
             style={{
@@ -101,7 +101,7 @@ export default function SearchTimeline() {
             </ul>
           </div>
 
-          {/* Bottom branch: type label + infra — placed in grid row 3 */}
+          {/* Bottom branch: type label + infra — placed in grid row 3 (desktop only) */}
           <div
             className={styles.stBottomBranch}
             style={{
@@ -114,6 +114,31 @@ export default function SearchTimeline() {
               <span className={styles.stTypeTag}>{node.type}</span>
               <span className={styles.stNodeTitle}>{node.title}</span>
             </div>
+            <ul className={styles.stItems}>
+              {node.infra.map((f) => (
+                <li key={f} className={styles.stItem}>
+                  <span className={styles.stItemDash}>—</span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Mobile card: type+title on same line, then feature, then infra */}
+          <div className={styles.stMobileCard}>
+            {i === 0 && <span className={styles.stSectionLabel}>SEARCH ROADMAP</span>}
+            <div className={styles.stMobileHeader}>
+              <span className={styles.stTypeTag}>{node.type}</span>
+              <span className={styles.stNodeTitle}>{node.title}</span>
+            </div>
+            <ul className={styles.stItems}>
+              {node.features.map((f) => (
+                <li key={f} className={styles.stItem}>
+                  <span className={styles.stItemDash}>—</span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
             <ul className={styles.stItems}>
               {node.infra.map((f) => (
                 <li key={f} className={styles.stItem}>

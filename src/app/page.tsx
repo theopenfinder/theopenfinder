@@ -1,5 +1,6 @@
 import AsciiBackground from '@/components/AsciiBackground';
 import GuidesScroll from '@/components/GuidesScroll';
+import TerminalStats from '@/components/TerminalStats';
 import styles from './page.module.css';
 
 // ── Platform abbreviation map ──────────────────────────────────────────────────
@@ -239,28 +240,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Stats bar ──────────────────────────────────────────── */}
-        <div className={styles.statsBar}>
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>200+</span>
-            <span className={styles.statLabel}>curated tools</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>10</span>
-            <span className={styles.statLabel}>categories</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>50+</span>
-            <span className={styles.statLabel}>subcategories</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>free</span>
-            <span className={styles.statLabel}>always open</span>
-          </div>
-        </div>
+        {/* ── Terminal stats ──────────────────────────────────────── */}
+        <TerminalStats />
 
         {/* ── Quick Start ────────────────────────────────────────── */}
         <section className={styles.section}>
@@ -289,8 +270,9 @@ export default function Home() {
               <a href="/tools" className={styles.sectionLink}>see all tools →</a>
             </div>
 
-            {/* Column label row */}
-            <div className={styles.toolHeader}>
+            <div className={styles.tableScrollWrapper}>
+              {/* Column label row */}
+              <div className={styles.toolHeader}>
               <span className={styles.toolHeaderCell}>#</span>
               <span className={styles.toolHeaderCell}>name</span>
               <span className={styles.toolHeaderCell}>category</span>
@@ -321,6 +303,7 @@ export default function Home() {
               </a>
             ))}
           </div>
+          </div>
         </section>
 
         {/* ── Browse Categories ───────────────────────────────────── */}
@@ -330,8 +313,9 @@ export default function Home() {
               <h2 className={styles.windowTitle}>browse by category</h2>
               <a href="/categories" className={styles.sectionLink}>full taxonomy →</a>
             </div>
-            {/* Column label row */}
-            <div className={styles.catHeader}>
+            <div className={styles.tableScrollWrapper}>
+              {/* Column label row */}
+              <div className={styles.catHeader}>
               <span className={styles.catHeaderCell}>#</span>
               <span className={styles.catHeaderCell}>category</span>
               <span className={styles.catHeaderCell}>subcategories</span>
@@ -354,6 +338,7 @@ export default function Home() {
               </a>
             ))}
           </div>
+          </div>
         </section>
 
         {/* ── Setup & Guides ─────────────────────────────────────── */}
@@ -368,7 +353,7 @@ export default function Home() {
         {/* ── Footer ─────────────────────────────────────────────── */}
         <footer className={styles.footer}>
           <div className={styles.footerLeft}>
-            <span className={styles.footerBrand}>OpenFinder</span>
+            <img src="/logo1-final.png" alt="OpenFinder" className="footerLogo" />
             <span className={styles.footerTagline}>open source, easier to find.</span>
           </div>
           <div className={styles.footerLinks}>

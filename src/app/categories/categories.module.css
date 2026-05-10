@@ -114,7 +114,7 @@
   .card { flex: 0 0 calc((100% - 0.75rem) / 2); }
 }
 @media (max-width: 520px) {
-  .card { flex: 0 0 100%; }
+  .card { flex: 0 0 calc((100% - 0.75rem) / 2); }
 }
 
 /* ── Card top ────────────────────────────────────────────────────── */
@@ -205,7 +205,6 @@
   justify-content: space-between;
   padding: 1.5rem 0;
   margin-top: 5rem;
-  border-top: 1px solid var(--color-neutral-700);
 }
 
 .footerLeft {
@@ -240,3 +239,8 @@
 }
 
 .footerLink:hover { color: var(--color-white); }
+
+@media (max-width: 640px) {
+  .navLinks { gap: 0.45rem; }
+  .navLink  { font-size: 0.6rem; }
+}

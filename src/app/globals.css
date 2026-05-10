@@ -47,6 +47,25 @@ body {
   margin-left: -15px;
 }
 
+/* Footer logo — same treatment, slightly smaller */
+.footerLogo {
+  height: 28px;
+  width: auto;
+  display: block;
+  align-self: flex-start;
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  margin-left: -10px;
+}
+
+@media (max-width: 640px) {
+  .navLogo {
+    height: 26px;
+    margin-left: -10px;
+  }
+}
+
 /* Full-screen diffuse glass layer — sits above the ASCII canvas (z:-1) and
    below all page content (z:1). Creates the translucent, slightly frosted look. */
 body::before {

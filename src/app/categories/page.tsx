@@ -104,7 +104,7 @@ export default async function CategoriesPage() {
             return (
               <a key={cat.id} href={`/categories/${cat.slug}`} className={styles.card}>
                 <div className={styles.cardTop}>
-                  <span className={styles.cardName}>{cat.name}</span>
+                  <span className={styles.cardName}>{cat.name.toLowerCase()}</span>
                   {cat.subcategories.length > 0 && (
                     <span className={styles.cardSubCount}>
                       {cat.subcategories.length} subcategories
@@ -135,7 +135,7 @@ export default async function CategoriesPage() {
         {/* ── Footer ─────────────────────────────────────────────── */}
         <footer className={styles.footer}>
           <div className={styles.footerLeft}>
-            <span className={styles.footerBrand}>OpenFinder</span>
+            <img src="/logo1-final.png" alt="OpenFinder" className="footerLogo" />
             <span className={styles.footerTagline}>open source, easier to find.</span>
           </div>
           <div className={styles.footerLinks}>

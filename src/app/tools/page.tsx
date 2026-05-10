@@ -85,7 +85,7 @@ export default async function ToolsPage() {
         {/* ── Footer ─────────────────────────────────────────────── */}
         <footer className={styles.footer}>
           <div className={styles.footerLeft}>
-            <span className={styles.footerBrand}>OpenFinder</span>
+            <img src="/logo1-final.png" alt="OpenFinder" className="footerLogo" />
             <span className={styles.footerTagline}>open source, easier to find.</span>
           </div>
           <div className={styles.footerLinks}>

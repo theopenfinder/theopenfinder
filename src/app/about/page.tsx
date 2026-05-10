@@ -208,7 +208,7 @@ export default function AboutPage() {
         {/* ── Footer ───────────────────────────────────────────── */}
         <footer className={homeStyles.footer}>
           <div className={homeStyles.footerLeft}>
-            <span className={homeStyles.footerBrand}>OpenFinder</span>
+            <img src="/logo1-final.png" alt="OpenFinder" className="footerLogo" />
             <span className={homeStyles.footerTagline}>open source, easier to find.</span>
           </div>
           <div className={homeStyles.footerLinks}>

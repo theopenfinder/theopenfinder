@@ -164,10 +164,8 @@ export default async function CategoryPage({
 
         {/* ── Header ───────────────────────────────────────────── */}
         <header className={styles.header}>
-          <p className={styles.headerMeta}>category</p>
-          <h1 className={styles.heading}>{category.name}.</h1>
+          <h1 className={styles.heading}>{category.name.toLowerCase()}</h1>
           <p className={styles.subheading}>{description}</p>
-          <p className={styles.headerCount}>{tools.length} tools</p>
         </header>
 
         {/* ── Interactive client section ────────────────────────── */}
@@ -176,7 +174,7 @@ export default async function CategoryPage({
         {/* ── Footer ───────────────────────────────────────────── */}
         <footer className={styles.footer}>
           <div className={styles.footerLeft}>
-            <span className={styles.footerBrand}>OpenFinder</span>
+            <img src="/logo1-final.png" alt="OpenFinder" className="footerLogo" />
             <span className={styles.footerTagline}>open source, easier to find.</span>
           </div>
           <div className={styles.footerLinks}>

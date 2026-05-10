@@ -121,29 +121,6 @@ export default function CategoryClient({ subcategories, tools }: Props) {
 
   return (
     <>
-      {/* ── Subcategory chips ─────────────────────────────────────── */}
-      {subcategories.length > 0 && (
-        <div className={styles.subcatNav}>
-          <button
-            className={`${styles.subcatChip} ${activeSubcat === null ? styles.subcatChipActive : ''}`}
-            onClick={() => setActiveSubcat(null)}
-          >
-            all
-            <span className={styles.subcatChipCount}>{tools.length}</span>
-          </button>
-          {subcategories.map(sub => (
-            <button
-              key={sub.id}
-              className={`${styles.subcatChip} ${activeSubcat === sub.id ? styles.subcatChipActive : ''}`}
-              onClick={() => setActiveSubcat(prev => prev === sub.id ? null : sub.id)}
-            >
-              {sub.name.replace(/-/g, '‑')}
-              <span className={styles.subcatChipCount}>{subcatCounts[sub.id] ?? 0}</span>
-            </button>
-          ))}
-        </div>
-      )}
-
       {/* ── Controls ─────────────────────────────────────────────── */}
       <div className={styles.controls}>
         <input
@@ -179,6 +156,29 @@ export default function CategoryClient({ subcategories, tools }: Props) {
           <button className={styles.clearBtn} onClick={clearAll}>clear ×</button>
         )}
       </div>
+
+      {/* ── Subcategory chips ─────────────────────────────────────── */}
+      {subcategories.length > 0 && (
+        <div className={styles.subcatNav}>
+          <button
+            className={`${styles.subcatChip} ${activeSubcat === null ? styles.subcatChipActive : ''}`}
+            onClick={() => setActiveSubcat(null)}
+          >
+            all
+            <span className={styles.subcatChipCount}>{tools.length}</span>
+          </button>
+          {subcategories.map(sub => (
+            <button
+              key={sub.id}
+              className={`${styles.subcatChip} ${activeSubcat === sub.id ? styles.subcatChipActive : ''}`}
+              onClick={() => setActiveSubcat(prev => prev === sub.id ? null : sub.id)}
+            >
+              {sub.name.replace(/-/g, '‑')}
+              <span className={styles.subcatChipCount}>{subcatCounts[sub.id] ?? 0}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* ── Content ───────────────────────────────────────────────── */}
       {filtered.length === 0 ? (

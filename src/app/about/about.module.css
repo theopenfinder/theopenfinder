@@ -498,6 +498,11 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
+/* Hide mobile-only card on desktop */
+.stMobileCard {
+  display: none;
+}
+
 /* ── Desktop animations (min-width: 861px) ─────────────────────── */
 @media (min-width: 861px) {
   .stLineRow::before {
@@ -580,6 +585,20 @@
 
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 860px) {
+  /* Section-level stacking */
+  .missionSection {
+    grid-template-columns: 1fr;
+  }
+
+  .infraSection {
+    grid-template-columns: 1fr;
+  }
+
+  .timelineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Search timeline */
   .stRoot {
     grid-template-columns: 1fr;
   }
@@ -596,26 +615,23 @@
     display: none;
   }
 
+  /* Hide desktop branches — replaced by stMobileCard */
   .stTopBranch,
   .stBottomBranch {
-    padding: 0;
-    align-items: flex-start;
-    text-align: left;
-    justify-content: flex-start;
-  }
-
-  .stTopBranch::after,
-  .stBottomBranch::before {
     display: none;
   }
 
-  .stNodeId {
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
+  /* Mobile card: type+title row → feature → infra */
+  .stMobileCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .stNodeTitle {
-    text-align: left;
-    max-width: none;
+  .stMobileHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.125rem;
   }
 }

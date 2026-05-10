@@ -57,6 +57,11 @@
   color: var(--color-brand-500);
 }
 
+@media (max-width: 640px) {
+  .navLinks { gap: 0.45rem; }
+  .navLink  { font-size: 0.6rem; }
+}
+
 /* ── Page header ─────────────────────────────────────────────────── */
 .header {
   padding-top: clamp(3rem, 7vw, 6rem);

@@ -394,7 +394,7 @@
     4.75rem      /* license */
     8rem         /* platforms */
     1fr          /* tags */
-    2.75rem;     /* year */
+    2rem;        /* year */
   align-items: center;
   column-gap: 1.25rem;
 }
@@ -444,9 +444,9 @@
 
 .toolName {
   font-family: var(--font-editorial);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 0.5875rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--color-white);
   white-space: nowrap;
   overflow: hidden;
@@ -482,7 +482,11 @@
   font-size: 0.5625rem;
   letter-spacing: 0;
   color: rgba(255, 255, 255, 0.22);
-  text-align: right;
+  text-align: center;
+}
+
+.toolHeader span:last-child {
+  text-align: center;
 }
 
 
@@ -495,7 +499,7 @@
     8.5rem     /* category */
     1fr        /* subcategories */
     1fr        /* description */
-    3.25rem;   /* tools */
+    2.5rem;    /* tools */
   align-items: center;
   column-gap: 1.25rem;
 }
@@ -581,8 +585,12 @@
   font-size: 0.5875rem;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.22);
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
+}
+
+.catHeader span:last-child {
+  text-align: center;
 }
 
 /* ── Guides scroll ───────────────────────────────────────────────── */
@@ -786,4 +794,37 @@
 
 .footerLink:hover {
   color: var(--color-white);
+}
+
+/* ── Scrollable table wrapper (mobile) ───────────────────────────── */
+.tableScrollWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tableScrollWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Keep table rows at their natural desktop width so they scroll correctly.
+   min-width must exceed the sum of all fixed grid columns + gaps + padding
+   to prevent the background/borders from stopping short of the last column. */
+.toolHeader,
+.toolRow {
+  min-width: 960px;
+}
+
+.catHeader,
+.catRow {
+  min-width: 600px;
+}
+
+/* ── Mobile overrides ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .quickStartGrid {
+    grid-template-columns: 1fr;
+  }
+  .navLinks { gap: 0.45rem; }
+  .navLink  { font-size: 0.6rem; }
 }

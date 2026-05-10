@@ -117,6 +117,14 @@
   color: rgba(255, 255, 255, 0.18);
 }
 
+@media (max-width: 860px) {
+  .panel {
+    padding-left: 0;
+    min-height: auto;
+    padding-top: 1.5rem;
+  }
+}
+
 /* ── Stat block ─────────────────────────────────────────────────────── */
 .statBlock {
   display: flex;
