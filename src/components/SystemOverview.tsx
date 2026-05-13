@@ -24,7 +24,7 @@ const COL3 = [
   { name: 'Utilities',  subs: ['file-management', 'backup', 'system-tools', 'terminal', 'compression', 'accessibility'] },
 ];
 
-const STATS = ['11 categories', '61 subcategories', '252 tools', 'high signal'];
+const STATS = ['11 categories', '61 subcategories', '250+ tools', 'high signal'];
 
 type Cat = { name: string; subs: string[] };
 

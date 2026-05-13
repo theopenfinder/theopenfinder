@@ -5,6 +5,10 @@ import { createServerClient } from '@/lib/supabase-server';
 import CategoryClient, { type SubcategoryRow, type ToolCard } from './CategoryClient';
 import styles from './category.module.css';
 
+const DISPLAY_NAMES: Record<string, string> = {
+  ai: 'AI',
+};
+
 // Placeholder descriptions per category — replace with real copy when ready
 const DESCRIPTIONS: Record<string, string> = {
   design:       'Editors, illustration tools, 3D software, and visual design environments.',
@@ -164,7 +168,7 @@ export default async function CategoryPage({
 
         {/* ── Header ───────────────────────────────────────────── */}
         <header className={styles.header}>
-          <h1 className={styles.heading}>{category.name.toLowerCase()}</h1>
+          <h1 className={styles.heading}>{DISPLAY_NAMES[category.slug] ?? category.name.toLowerCase()}</h1>
           <p className={styles.subheading}>{description}</p>
         </header>
 

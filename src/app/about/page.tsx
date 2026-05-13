@@ -95,22 +95,21 @@ export default function AboutPage() {
             </h1>
             <div className={styles.missionContent}>
               <p className={styles.missionBody}>
-                The open-source ecosystem is vast, powerful — and largely invisible
+                The open-source ecosystem is vast, powerful, and largely invisible
                 to the people who would benefit from it most. Discovery is fragmented.
                 Tools are scattered across GitHub stars, Reddit threads, and word-of-mouth.
                 If you don&apos;t already know where to look, you don&apos;t find anything.
               </p>
               <p className={styles.missionBody}>
                 Most open-source projects never reach the people who need them.
-                Not because they aren&apos;t good enough — because there&apos;s no clear path to them.
+                Not because they aren&apos;t good enough, but because there&apos;s no clear path to them.
                 OpenFinder is built to change that: a place where tools are structured,
                 contextualized, and immediately usable.
               </p>
               <p className={styles.missionBody}>
-                OpenFinder is a high-signal index of open-source software. Not a raw list
-                of everything on GitHub — a deliberately organized system where each tool
-                earns its place. Every listing is open source, actively maintained, and
-                selected for its relevance within a clearly defined category.
+                OpenFinder is a high-signal index of open-source software, not a raw list
+                of everything on GitHub. Tools are organized by category, tagged by use,
+                and presented with enough context to make discovery easier.
               </p>
               <p className={styles.missionBody}>
                 Access to great software shouldn&apos;t depend on knowing the right communities.
@@ -136,10 +135,10 @@ export default function AboutPage() {
             <h2 className={styles.infraHeading}>How it&apos;s built.</h2>
             <p className={styles.infraBody}>
               OpenFinder is a Next.js app written in TypeScript, styled with CSS
-              Modules, and deployed on Vercel. The tool directory is backed by
-              Supabase — a PostgreSQL database seeded from structured CSV files
-              via a custom script. The animated ASCII canvas is a hand-rolled
-              canvas renderer that runs entirely client-side.
+              Modules, and deployed on Vercel. The tool directory is backed by Supabase,
+              a PostgreSQL database seeded from structured CSV files via a custom script.
+              The animated ASCII canvas is a hand-rolled canvas renderer that runs
+              entirely client-side.
             </p>
             <p className={styles.infraBody}>
               Everything is open source. The full architecture, data schema, and

@@ -208,12 +208,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="ts-description">Description</label>
+                    <label className={styles.formLabel} htmlFor="ts-description">Why it belongs</label>
                     <textarea
                       className={styles.formTextarea}
                       id="ts-description"
                       name="description"
-                      placeholder="briefly describe what the tool does and why it belongs in the directory…"
+                      placeholder="what does it do, who is it for, and why should it be in the directory…"
                     />
                   </div>
 
@@ -257,12 +257,29 @@ export default function ContactPage() {
               ))}
             </div>
 
+            {/* Email card */}
+            <div className={styles.emailPanel}>
+              <div className={styles.socialPanelHeader}>
+                <span className={styles.socialPanelTitle}>email</span>
+              </div>
+              <div className={styles.emailRow}>
+                <span className={styles.emailLabel}>general</span>
+                <a href="mailto:contact@theopenfinder.org" className={styles.emailAddress}>contact@theopenfinder.org</a>
+              </div>
+              <div className={styles.emailRow}>
+                <span className={styles.emailLabel}>bulk submissions / corrections</span>
+                <a href="mailto:submit@theopenfinder.org" className={styles.emailAddress}>submit@theopenfinder.org</a>
+              </div>
+              <div className={styles.emailRow}>
+                <span className={styles.emailLabel}>security reports</span>
+                <a href="mailto:security@theopenfinder.org" className={styles.emailAddress}>security@theopenfinder.org</a>
+              </div>
+            </div>
+
             {/* Info callout */}
             <div className={styles.infoCallout}>
               <p>
-                <strong>Want to submit a tool?</strong>{' '}OpenFinder is community-driven.
-                If you know an open-source project that deserves visibility,
-                drop us a message and we&apos;ll review it for the directory.
+Have a tool to suggest? Send it through the form with notes on fit, category, and relevance.
               </p>
             </div>
 

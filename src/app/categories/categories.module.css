@@ -127,10 +127,10 @@
 }
 
 .cardName {
-  font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 1.75vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-editorial);
+  font-size: clamp(1.0625rem, 1.49vw, 1.49rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: var(--color-white);
   line-height: 1.1;
   transition: color 0.15s ease;

@@ -10,7 +10,7 @@
 
   --font-primary:   var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   --font-mono:      "Courier New", Courier, monospace;
-  --font-editorial: "Consolas", "Menlo", "Lucida Console", "Courier New", monospace;
+  --font-editorial: "Consolas", "Menlo", "Lucida Console", ui-monospace, "Courier New", monospace;
   --font-serif:     "Times New Roman", "Georgia", Times, serif;
 }
 

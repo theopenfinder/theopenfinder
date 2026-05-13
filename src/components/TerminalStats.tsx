@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import styles from './TerminalStats.module.css';
 
 const STATS = [
-  '200+ curated tools',
-  '10 categories',
-  '50+ subcategories',
+  '250+ tools',
+  '11 categories',
+  '61 subcategories',
 ];
 
 const TYPE_MS   = 65;

@@ -6,7 +6,7 @@ import styles from './page.module.css';
 // ── Platform abbreviation map ──────────────────────────────────────────────────
 const PLAT: Record<string, string> = {
   linux: 'lnx', macos: 'mac', windows: 'win',
-  android: 'and', ios: 'ios', web: 'web',
+  android: 'android', ios: 'ios', web: 'web',
 };
 
 // ── Tools data ─────────────────────────────────────────────────────────────────
@@ -224,14 +224,13 @@ export default function Home() {
         {/* ── Hero ───────────────────────────────────────────────── */}
         <section className={styles.hero}>
           <h1 className={styles.heroHeading}>
-            A clearer way to find<br />open-source tools.
+            A clearer path to<br />open-source tools.
           </h1>
           <div className={styles.heroBody}>
             <p>
-              OpenFinder is a discovery hub for open-source tools and
-              alternatives across every category. Curated for quality,
-              organized for clarity — built to help anyone find the
-              right tool.
+              OpenFinder is a discovery hub for open-source tools and alternatives
+              across every category. Curated for quality, organized for clarity,
+              built to help anyone find the right tool.
             </p>
           </div>
           <div className={styles.heroCta}>

@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   },
 };
 
+const DISPLAY_NAMES: Record<string, string> = {
+  ai: 'AI',
+};
+
 const DESCRIPTIONS: Record<string, string> = {
   design:       'Editors, illustration tools, 3D software, and visual design environments.',
   media:        'Players, streaming, recording, and audio tools.',
@@ -104,7 +108,7 @@ export default async function CategoriesPage() {
             return (
               <a key={cat.id} href={`/categories/${cat.slug}`} className={styles.card}>
                 <div className={styles.cardTop}>
-                  <span className={styles.cardName}>{cat.name.toLowerCase()}</span>
+                  <span className={styles.cardName}>{DISPLAY_NAMES[cat.slug] ?? cat.name.toLowerCase()}</span>
                   {cat.subcategories.length > 0 && (
                     <span className={styles.cardSubCount}>
                       {cat.subcategories.length} subcategories

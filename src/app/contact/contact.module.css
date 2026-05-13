@@ -75,6 +75,16 @@
   margin: 0;
 }
 
+.formPanelNote {
+  font-family: var(--font-editorial);
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: rgba(255, 255, 255, 0.22);
+  line-height: 1;
+  margin-left: auto;
+}
+
 .formPanelTag {
   font-family: var(--font-editorial);
   font-size: 0.5rem;
@@ -337,10 +347,86 @@
   color: var(--color-brand-500);
 }
 
+/* Form note */
+.formNote {
+  font-family: var(--font-editorial);
+  font-size: 0.6125rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  color: rgba(255, 255, 255, 0.38);
+  padding-bottom: 0.125rem;
+}
+
+/* Email panel */
+.emailPanel {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px #030303,
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.emailRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.emailRow:last-child {
+  border-bottom: none;
+}
+
+.emailLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.emailLabel {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1;
+}
+
+.emailNote {
+  font-family: var(--font-editorial);
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1;
+}
+
+.emailAddress {
+  font-family: var(--font-editorial);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.12s ease;
+}
+
+.emailAddress:hover {
+  color: var(--color-brand-500);
+}
+
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 860px) {
   .bodyGrid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .formRow {
@@ -348,6 +434,6 @@
   }
 
   .sidebar {
-    gap: 1rem;
+    gap: 2rem;
   }
 }

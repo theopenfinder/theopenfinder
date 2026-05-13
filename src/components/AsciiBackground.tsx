@@ -73,6 +73,7 @@ export default function AsciiBackground() {
     const FONT     = `${CELL_PX - 3}px "Courier New", Courier, monospace`;
 
     // ── State ──────────────────────────────────────────────────────────────────
+    let dpr    = 1;
     let cols   = 0;
     let rows   = 0;
     let cells: Cell[]         = [];
@@ -99,10 +100,15 @@ export default function AsciiBackground() {
 
     // ── Grid setup ─────────────────────────────────────────────────────────────
     function setup() {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
-      cols  = Math.ceil(canvas.width  / CELL_PX) + 1;
-      rows  = Math.ceil(canvas.height / CELL_PX) + 1;
+      dpr        = window.devicePixelRatio || 1;
+      const cssW = window.innerWidth;
+      const cssH = window.innerHeight;
+      canvas.width  = cssW * dpr;
+      canvas.height = cssH * dpr;
+      // setTransform resets any prior scale so repeated resize calls don't compound
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols  = Math.ceil(cssW / CELL_PX) + 1;
+      rows  = Math.ceil(cssH / CELL_PX) + 1;
       cells = Array.from({ length: cols * rows }, () => ({
         char:  CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)],
         phase: Math.random() * Math.PI * 2,
@@ -300,7 +306,7 @@ export default function AsciiBackground() {
 
     // ── Main render ────────────────────────────────────────────────────────────
     function render(ts: number) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
       ctx.font      = FONT;
       ctx.textAlign = 'left';
 
