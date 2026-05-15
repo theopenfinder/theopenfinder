@@ -159,6 +159,49 @@
   min-height: 100px;
 }
 
+/* Select input */
+.formSelect {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  font-family: var(--font-editorial);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.25)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+.formSelect option {
+  background: #141414;
+  color: var(--color-white);
+}
+
+.formSelect:focus {
+  border-color: rgba(210, 190, 155, 0.35);
+  background-color: rgba(210, 190, 155, 0.03);
+}
+
+/* Error message */
+.formError {
+  font-family: var(--font-editorial);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: rgba(255, 90, 90, 0.85);
+  line-height: 1.4;
+  margin: 0;
+}
+
 .submitBtn {
   display: inline-flex;
   align-items: center;
@@ -189,6 +232,16 @@
 
 .submitBtn:active {
   opacity: 0.85;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submitBtn:disabled:hover {
+  background: var(--color-brand-500);
+  color: var(--color-black);
 }
 
 /* ── Sidebar ─────────────────────────────────────────────────────── */

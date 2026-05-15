@@ -52,23 +52,79 @@ const SOCIALS = [
   },
 ];
 
+type FormState = 'idle' | 'loading' | 'success' | 'error';
+
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
-  const [sentTool, setSentTool] = useState(false);
+  const [msgState, setMsgState] = useState<FormState>('idle');
+  const [msgError, setMsgError] = useState('');
+  const [toolState, setToolState] = useState<FormState>('idle');
+  const [toolError, setToolError] = useState('');
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    (e.target as HTMLFormElement).reset();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+    setMsgState('loading');
+    setMsgError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: data.type || 'general',
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Failed to send');
+
+      setMsgState('success');
+      form.reset();
+      setTimeout(() => setMsgState('idle'), 3000);
+    } catch (err) {
+      setMsgState('error');
+      setMsgError(err instanceof Error ? err.message : 'Failed to send');
+    }
   }
 
-  function handleToolSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleToolSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSentTool(true);
-    setTimeout(() => setSentTool(false), 3000);
-    (e.target as HTMLFormElement).reset();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+
+    setToolState('loading');
+    setToolError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'tool_submission',
+          tool: data.tool,
+          url: data.url,
+          category: data.category,
+          description: data.description,
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Failed to submit');
+
+      setToolState('success');
+      form.reset();
+      setTimeout(() => setToolState('idle'), 3000);
+    } catch (err) {
+      setToolState('error');
+      setToolError(err instanceof Error ? err.message : 'Failed to submit');
+    }
   }
 
   return (
@@ -130,10 +186,23 @@ export default function ContactPage() {
                         id="cf-email"
                         name="email"
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder="you@example.com (optional)"
                         autoComplete="email"
                       />
                     </div>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel} htmlFor="cf-type">Type</label>
+                    <select
+                      className={styles.formSelect}
+                      id="cf-type"
+                      name="type"
+                      defaultValue="general"
+                    >
+                      <option value="general">General inquiry</option>
+                      <option value="security">Security report</option>
+                    </select>
                   </div>
 
                   <div className={styles.formGroup}>
@@ -144,21 +213,31 @@ export default function ContactPage() {
                       name="subject"
                       type="text"
                       placeholder="feature suggestion, feedback, bug report…"
+                      required
                     />
                   </div>
 
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="cf-message">Text</label>
+                    <label className={styles.formLabel} htmlFor="cf-message">Message</label>
                     <textarea
                       className={styles.formTextarea}
                       id="cf-message"
                       name="message"
                       placeholder="what's on your mind…"
+                      required
                     />
                   </div>
 
-                  <button type="submit" className={styles.submitBtn}>
-                    {sent ? 'sent ✓' : 'send →'}
+                  {msgState === 'error' && msgError && (
+                    <p className={styles.formError}>{msgError}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={msgState === 'loading'}
+                  >
+                    {msgState === 'loading' ? 'sending…' : msgState === 'success' ? 'sent ✓' : 'send →'}
                   </button>
 
                 </div>
@@ -182,6 +261,7 @@ export default function ContactPage() {
                         name="tool"
                         type="text"
                         placeholder="e.g. Jellyfin"
+                        required
                       />
                     </div>
                     <div className={styles.formGroup}>
@@ -214,11 +294,20 @@ export default function ContactPage() {
                       id="ts-description"
                       name="description"
                       placeholder="what does it do, who is it for, and why should it be in the directory…"
+                      required
                     />
                   </div>
 
-                  <button type="submit" className={styles.submitBtn}>
-                    {sentTool ? 'submitted ✓' : 'submit →'}
+                  {toolState === 'error' && toolError && (
+                    <p className={styles.formError}>{toolError}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={toolState === 'loading'}
+                  >
+                    {toolState === 'loading' ? 'submitting…' : toolState === 'success' ? 'submitted ✓' : 'submit →'}
                   </button>
 
                 </div>
