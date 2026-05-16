@@ -1,9 +1,22 @@
 'use client';
 
 import { useState } from 'react';
+import Script from 'next/script';
 import AsciiBackground from '@/components/AsciiBackground';
 import homeStyles from '../page.module.css';
 import styles from './contact.module.css';
+
+/* ── Turnstile global type ──────────────────────────────────────── */
+
+declare global {
+  interface Window {
+    turnstile?: {
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 /* ── SVG icons ─────────────────────────────────────────────────── */
 
@@ -32,32 +45,17 @@ function IconX() {
 }
 
 const SOCIALS = [
-  {
-    name: 'GitHub',
-    handle: '/openfinder',
-    href: '#',
-    Icon: IconGithub,
-  },
-  {
-    name: 'Reddit',
-    handle: 'r/openfinder',
-    href: '#',
-    Icon: IconReddit,
-  },
-  {
-    name: 'X',
-    handle: '@theopenfinder',
-    href: '#',
-    Icon: IconX,
-  },
+  { name: 'GitHub',  handle: '/openfinder',    href: '#', Icon: IconGithub },
+  { name: 'Reddit',  handle: 'r/openfinder',   href: '#', Icon: IconReddit },
+  { name: 'X',       handle: '@theopenfinder', href: '#', Icon: IconX },
 ];
 
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function ContactPage() {
-  const [msgState, setMsgState] = useState<FormState>('idle');
-  const [msgError, setMsgError] = useState('');
+  const [msgState, setMsgState]   = useState<FormState>('idle');
+  const [msgError, setMsgError]   = useState('');
   const [toolState, setToolState] = useState<FormState>('idle');
   const [toolError, setToolError] = useState('');
 
@@ -74,11 +72,13 @@ export default function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          type: data.type || 'general',
-          name: data.name,
-          email: data.email,
-          subject: data.subject,
-          message: data.message,
+          type:           data.type || 'general',
+          name:           data.name,
+          email:          data.email,
+          subject:        data.subject,
+          message:        data.message,
+          hp:             data.hp ?? '',
+          turnstileToken: data['cf-turnstile-response'] ?? '',
         }),
       });
 
@@ -87,10 +87,12 @@ export default function ContactPage() {
 
       setMsgState('success');
       form.reset();
+      window.turnstile?.reset();
       setTimeout(() => setMsgState('idle'), 3000);
     } catch (err) {
       setMsgState('error');
       setMsgError(err instanceof Error ? err.message : 'Failed to send');
+      window.turnstile?.reset();
     }
   }
 
@@ -107,11 +109,13 @@ export default function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          type: 'tool_submission',
-          tool: data.tool,
-          url: data.url,
-          category: data.category,
-          description: data.description,
+          type:           'tool_submission',
+          tool:           data.tool,
+          url:            data.url,
+          category:       data.category,
+          description:    data.description,
+          hp:             data.hp ?? '',
+          turnstileToken: data['cf-turnstile-response'] ?? '',
         }),
       });
 
@@ -120,15 +124,24 @@ export default function ContactPage() {
 
       setToolState('success');
       form.reset();
+      window.turnstile?.reset();
       setTimeout(() => setToolState('idle'), 3000);
     } catch (err) {
       setToolState('error');
       setToolError(err instanceof Error ? err.message : 'Failed to submit');
+      window.turnstile?.reset();
     }
   }
 
   return (
     <>
+      {TURNSTILE_SITE_KEY && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="lazyOnload"
+        />
+      )}
+
       <AsciiBackground />
 
       <div className={homeStyles.siteWrapper}>
@@ -161,6 +174,12 @@ export default function ContactPage() {
 
             {/* Message form */}
             <form onSubmit={handleSubmit}>
+              {/* Honeypot — must stay empty; bots that fill it are silently dropped */}
+              <div aria-hidden="true" className={styles.honeypot}>
+                <label htmlFor="cf-hp">Leave this blank</label>
+                <input id="cf-hp" name="hp" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div className={styles.formPanel}>
                 <div className={styles.formPanelHeader}>
                   <span className={styles.formPanelTitle}>message</span>
@@ -177,6 +196,7 @@ export default function ContactPage() {
                         type="text"
                         placeholder="your name (optional)"
                         autoComplete="name"
+                        maxLength={120}
                       />
                     </div>
                     <div className={styles.formGroup}>
@@ -188,6 +208,7 @@ export default function ContactPage() {
                         type="email"
                         placeholder="you@example.com (optional)"
                         autoComplete="email"
+                        maxLength={254}
                       />
                     </div>
                   </div>
@@ -214,6 +235,7 @@ export default function ContactPage() {
                       type="text"
                       placeholder="feature suggestion, feedback, bug report…"
                       required
+                      maxLength={160}
                     />
                   </div>
 
@@ -225,8 +247,15 @@ export default function ContactPage() {
                       name="message"
                       placeholder="what's on your mind…"
                       required
+                      maxLength={5000}
                     />
                   </div>
+
+                  {TURNSTILE_SITE_KEY && (
+                    <div className={styles.turnstileWrapper}>
+                      <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
+                    </div>
+                  )}
 
                   {msgState === 'error' && msgError && (
                     <p className={styles.formError}>{msgError}</p>
@@ -246,6 +275,12 @@ export default function ContactPage() {
 
             {/* Tool submissions form */}
             <form onSubmit={handleToolSubmit}>
+              {/* Honeypot */}
+              <div aria-hidden="true" className={styles.honeypot}>
+                <label htmlFor="ts-hp">Leave this blank</label>
+                <input id="ts-hp" name="hp" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div className={styles.formPanel}>
                 <div className={styles.formPanelHeader}>
                   <span className={styles.formPanelTitle}>tool submissions</span>
@@ -262,6 +297,7 @@ export default function ContactPage() {
                         type="text"
                         placeholder="e.g. Jellyfin"
                         required
+                        maxLength={160}
                       />
                     </div>
                     <div className={styles.formGroup}>
@@ -272,6 +308,7 @@ export default function ContactPage() {
                         name="url"
                         type="url"
                         placeholder="https://github.com/…"
+                        maxLength={500}
                       />
                     </div>
                   </div>
@@ -284,6 +321,7 @@ export default function ContactPage() {
                       name="category"
                       type="text"
                       placeholder="e.g. Media, Dev Tools, Security…"
+                      maxLength={120}
                     />
                   </div>
 
@@ -295,8 +333,15 @@ export default function ContactPage() {
                       name="description"
                       placeholder="what does it do, who is it for, and why should it be in the directory…"
                       required
+                      maxLength={5000}
                     />
                   </div>
+
+                  {TURNSTILE_SITE_KEY && (
+                    <div className={styles.turnstileWrapper}>
+                      <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
+                    </div>
+                  )}
 
                   {toolState === 'error' && toolError && (
                     <p className={styles.formError}>{toolError}</p>
@@ -334,9 +379,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   aria-label={`OpenFinder on ${name}`}
                 >
-                  <span className={styles.socialIcon}>
-                    <Icon />
-                  </span>
+                  <span className={styles.socialIcon}><Icon /></span>
                   <span className={styles.socialInfo}>
                     <span className={styles.socialName}>{name}</span>
                     <span className={styles.socialHandle}>{handle}</span>

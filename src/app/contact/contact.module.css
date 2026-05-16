@@ -159,6 +159,23 @@
   min-height: 100px;
 }
 
+/* Honeypot — visually hidden, kept out of tab order */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Turnstile widget wrapper */
+.turnstileWrapper {
+  /* Turnstile renders its own fixed-size iframe; just provide spacing */
+  margin-top: 0.125rem;
+}
+
 /* Select input */
 .formSelect {
   background: rgba(255, 255, 255, 0.035);
