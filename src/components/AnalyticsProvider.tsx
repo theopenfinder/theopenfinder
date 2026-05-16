@@ -1,17 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-
-function track(eventName: string, props: Record<string, string>): void {
-  if (typeof window === 'undefined') return;
-  const w = window as any;
-  w.__OF_TELEMETRY = w.__OF_TELEMETRY ?? [];
-  w.__OF_TELEMETRY.push({ type: eventName, ...props, ts: Date.now() });
-  if (w.__OF_TELEMETRY.length > 50) w.__OF_TELEMETRY.shift();
-  // Forward to Plausible or Umami when loaded
-  w.plausible?.(eventName, { props });
-  w.umami?.track(eventName, props);
-}
+import { track } from '@/lib/analytics';
 
 export default function AnalyticsProvider() {
   useEffect(() => {

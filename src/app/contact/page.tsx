@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Script from 'next/script';
 import AsciiBackground from '@/components/AsciiBackground';
+import { track } from '@/lib/analytics';
 import homeStyles from '../page.module.css';
 import styles from './contact.module.css';
 
@@ -85,6 +86,7 @@ export default function ContactPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Failed to send');
 
+      track('contact_form_submit', { type: data.type || 'general' });
       setMsgState('success');
       form.reset();
       window.turnstile?.reset();
@@ -122,6 +124,7 @@ export default function ContactPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Failed to submit');
 
+      track('contact_form_submit', { type: 'tool_submission' });
       setToolState('success');
       form.reset();
       window.turnstile?.reset();
