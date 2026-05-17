@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+const CF_WA_TOKEN      = process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
 
 export default function RootLayout({
   children,
@@ -42,6 +43,14 @@ export default function RootLayout({
             defer
             data-domain={PLAUSIBLE_DOMAIN}
             src="https://plausible.io/js/script.js"
+            strategy="afterInteractive"
+          />
+        )}
+        {CF_WA_TOKEN && (
+          <Script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token":"${CF_WA_TOKEN}"}`}
             strategy="afterInteractive"
           />
         )}
