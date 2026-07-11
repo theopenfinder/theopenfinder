@@ -962,7 +962,7 @@ export default function ToolsClient({ tools }: { tools: ToolRow[] }) {
               </div>
 
               {tool.description && (
-                <p className={styles.cardDesc}>{tool.description}</p>
+                <p className={styles.cardDesc}>{tool.description.replace(/\s+/g, ' ').trim()}</p>
               )}
 
               {tool.platforms && tool.platforms.length > 0 && (

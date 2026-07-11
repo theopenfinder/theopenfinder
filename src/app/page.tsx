@@ -1,6 +1,8 @@
 import AsciiBackground from '@/components/AsciiBackground';
 import GuidesScroll from '@/components/GuidesScroll';
 import TerminalStats from '@/components/TerminalStats';
+import { guides, getGuideBySlug } from '@/content/guides';
+import { createServerClient } from '@/lib/supabase-server';
 import styles from './page.module.css';
 
 // ── Platform abbreviation map ──────────────────────────────────────────────────
@@ -105,101 +107,76 @@ const TOOLS = [
 
 // ── Categories data ────────────────────────────────────────────────────────────
 const CATEGORIES = [
-  { name: 'Productivity',  count: 22, desc: 'Notes, tasks, calendars, and collaboration',       subs: ['notes', 'tasks', 'calendars', 'collaboration'] },
-  { name: 'Education',     count: 12, desc: 'Wikis, flashcards, courses, and references',        subs: ['wikis', 'flashcards', 'courses', 'references'] },
+  { name: 'Productivity',  count: 27, desc: 'Notes, tasks, calendars, and collaboration',       subs: ['notes', 'tasks', 'calendars', 'collaboration'] },
+  { name: 'Education',     count: 7,  desc: 'Wikis, flashcards, courses, and references',        subs: ['wikis', 'flashcards', 'courses', 'references'] },
   { name: 'Development',   count: 38, desc: 'IDEs, CLIs, version control, and devtools',         subs: ['IDEs', 'CLIs', 'version control', 'devtools'] },
-  { name: 'Design',        count: 24, desc: 'Creative tools, editors, and asset managers',       subs: ['image editing', '3d modeling', 'vector', 'UI design'] },
+  { name: 'Design',        count: 21, desc: 'Creative tools, editors, and asset managers',       subs: ['image editing', '3d modeling', 'vector', 'UI design'] },
   { name: 'Media',         count: 18, desc: 'Players, streaming, editing, and broadcasting',     subs: ['players', 'streaming', 'screen recording', 'podcasting'] },
-  { name: 'AI',            count: 14, desc: 'Local models, frameworks, and AI tools',            subs: ['local models', 'frameworks', 'inference', 'assistants'] },
-  { name: 'Security',      count: 15, desc: 'Password managers, auditing, and encryption',       subs: ['password managers', 'VPN', 'encryption', 'auditing'] },
-  { name: 'Privacy',       count: 11, desc: 'VPNs, trackers, ad-blocking, and anonymity',        subs: ['browsers', 'ad-blocking', 'proxies', 'anonymity'] },
-  { name: 'Data',          count: 9,  desc: 'Databases, analytics, and data management',         subs: ['databases', 'analytics', 'visualization', 'pipelines'] },
-  { name: 'Utilities',     count: 16, desc: 'System tools, automation, and file management',     subs: ['file management', 'automation', 'system tools', 'terminals'] },
+  { name: 'AI',            count: 30, desc: 'Local models, frameworks, and AI tools',            subs: ['local models', 'frameworks', 'inference', 'assistants'] },
+  { name: 'Security',      count: 21, desc: 'Password managers, auditing, and encryption',       subs: ['password managers', 'VPN', 'encryption', 'auditing'] },
+  { name: 'Privacy',       count: 28, desc: 'VPNs, trackers, ad-blocking, and anonymity',        subs: ['browsers', 'ad-blocking', 'proxies', 'anonymity'] },
+  { name: 'Data',          count: 31, desc: 'Databases, analytics, and data management',         subs: ['databases', 'analytics', 'visualization', 'pipelines'] },
+  { name: 'Utilities',     count: 41, desc: 'System tools, automation, and file management',     subs: ['file management', 'automation', 'system tools', 'terminals'] },
 ];
 
-// ── Quick start guides ─────────────────────────────────────────────────────────
-const QUICK_START = [
-  {
-    type: 'guide',
-    title: 'GitHub for Newcomers',
-    desc: 'Find, star, and fork projects. Understand repos, issues, and how to navigate the largest open-source hub in the world.',
-    href: '/guides',
-  },
-  {
-    type: 'guide',
-    title: 'Open Source 101',
-    desc: 'What open-source means, how licenses work, and how to get the most out of free software without compromise.',
-    href: '/guides',
-  },
-  {
-    type: 'starter pack',
-    title: 'Privacy Starter Pack',
-    desc: 'Replace the most data-hungry tools in your everyday life with curated open-source alternatives — in a weekend.',
-    href: '/guides',
-  },
-];
 
-// ── Guides data ────────────────────────────────────────────────────────────────
-const GUIDES = [
-  {
-    type: 'starter pack',
-    title: 'De-Google Your Life',
-    desc: 'Replace every Google product with a curated open-source alternative — step by step.',
-    tools: ['Nextcloud', 'Brave', 'ProtonMail', 'Organic Maps'],
-    href: '#',
-  },
-  {
-    type: 'workflow',
-    title: 'Self-Host Your Stack',
-    desc: 'Infrastructure essentials for the privacy-conscious developer. Your data stays yours.',
-    tools: ['Coolify', 'Traefik', 'Uptime Kuma', 'Vaultwarden'],
-    href: '#',
-  },
-  {
-    type: 'starter pack',
-    title: 'Open Design Suite',
-    desc: 'Professional-grade creative tools without a subscription — for designers who value freedom.',
-    tools: ['Inkscape', 'Penpot', 'Blender', 'GIMP'],
-    href: '#',
-  },
-  {
-    type: 'workflow',
-    title: 'Privacy-First Browsing',
-    desc: 'A layered browser + extension setup that keeps trackers, ads, and surveillance at bay.',
-    tools: ['Firefox', 'uBlock Origin', 'LibreWolf', 'Mullvad'],
-    href: '#',
-  },
-  {
-    type: 'guide',
-    title: 'AI Without Big Tech',
-    desc: 'Run powerful language models locally. No API keys, no data sent to the cloud.',
-    tools: ['Ollama', 'LM Studio', 'Open WebUI', 'llama.cpp'],
-    href: '#',
-  },
-  {
-    type: 'starter pack',
-    title: 'Developer Essentials',
-    desc: 'Terminal, editor, version control, and productivity tools — a complete open-source workflow.',
-    tools: ['Neovim', 'Zellij', 'Gitui', 'Fish Shell'],
-    href: '#',
-  },
-  {
-    type: 'guide',
-    title: 'Home Lab Starter',
-    desc: 'Everything you need to run your first home server and start self-hosting in a weekend.',
-    tools: ['Proxmox', 'Home Assistant', 'Pi-hole', 'Portainer'],
-    href: '#',
-  },
-  {
-    type: 'workflow',
-    title: 'Open Media Stack',
-    desc: 'Manage, stream, and enjoy your music, video, and photos without platform lock-in.',
-    tools: ['Jellyfin', 'Navidrome', 'Immich', 'Kavita'],
-    href: '#',
-  },
-];
+// ── Featured guides (pulled from content registry) ────────────────────────────
+const FEATURED_GUIDE_SLUGS = ['open-source-101', 'debloat-your-pc', 'swap-now-stack'] as const;
 
-export default function Home() {
+const GUIDES = FEATURED_GUIDE_SLUGS
+  .map(getGuideBySlug)
+  .filter((g): g is NonNullable<typeof g> => g !== undefined)
+  .map((g) => ({
+    type: g.type,
+    title: g.title,
+    desc: g.description,
+    tools: g.tools ?? [],
+    href: `/guides/${g.slug}`,
+  }));
+
+const CAROUSEL_GUIDES = guides
+  .filter((g) => !(FEATURED_GUIDE_SLUGS as readonly string[]).includes(g.slug))
+  .map((g) => ({
+    type: g.type,
+    title: g.title,
+    desc: g.description,
+    tools: g.tools ?? [],
+    href: `/guides/${g.slug}`,
+  }));
+
+async function getCategoryCounts(): Promise<Record<string, number>> {
+  const supabase = createServerClient();
+
+  const [{ data: allCats }, { data: links }] = await Promise.all([
+    supabase.from('categories').select('id, name, parent_id'),
+    supabase.from('tool_categories').select('tool_id, category_id'),
+  ]);
+
+  if (!allCats || !links) return {};
+
+  const topCats = allCats.filter(c => c.parent_id === null);
+  const subToParent: Record<number, number> = {};
+  for (const c of allCats) {
+    if (c.parent_id !== null) subToParent[c.id] = c.parent_id;
+  }
+
+  const topIdToName: Record<number, string> = {};
+  for (const c of topCats) topIdToName[c.id] = c.name;
+
+  const toolSets: Record<string, Set<number>> = {};
+  for (const c of topCats) toolSets[c.name] = new Set();
+
+  for (const { tool_id, category_id } of links) {
+    const topName = topIdToName[category_id] ?? topIdToName[subToParent[category_id]];
+    if (topName && toolSets[topName]) toolSets[topName].add(tool_id);
+  }
+
+  return Object.fromEntries(Object.entries(toolSets).map(([k, v]) => [k, v.size]));
+}
+
+export default async function Home() {
+  const categoryCounts = await getCategoryCounts();
+
   return (
     <>
       <AsciiBackground />
@@ -245,10 +222,10 @@ export default function Home() {
         {/* ── Quick Start ────────────────────────────────────────── */}
         <section className={styles.section}>
           <div className={styles.quickStartGrid}>
-            {QUICK_START.map(card => (
+            {GUIDES.map(card => (
               <a key={card.title} href={card.href} className={styles.quickStartCard}>
                 <div className={styles.quickStartCardBar}>
-                  <span className={styles.quickStartLabel}>quick start</span>
+                  <span className={styles.quickStartLabel}>{card.type}</span>
                 </div>
                 <div className={styles.quickStartCardBody}>
                   <p className={styles.quickStartCardTitle}>{card.title}</p>
@@ -333,7 +310,7 @@ export default function Home() {
                 <span className={styles.catName}>{cat.name}</span>
                 <span className={styles.catSubs}>{cat.subs.join(' · ')}</span>
                 <span className={styles.catDesc}>{cat.desc}</span>
-                <span className={styles.catCount}>{cat.count}</span>
+                <span className={styles.catCount}>{categoryCounts[cat.name] ?? cat.count}</span>
               </a>
             ))}
           </div>
@@ -346,7 +323,7 @@ export default function Home() {
             <h2 className={styles.sectionTitle}>setups &amp; guides</h2>
             <a href="/guides" className={styles.sectionLink}>all guides →</a>
           </div>
-          <GuidesScroll guides={GUIDES} />
+          <GuidesScroll guides={CAROUSEL_GUIDES} />
         </section>
 
         {/* ── Footer ─────────────────────────────────────────────── */}

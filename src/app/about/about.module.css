@@ -11,7 +11,7 @@
 .missionLeft {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1rem;
 }
 
 .missionRight {
@@ -159,10 +159,9 @@
 
 .stackKey {
   font-family: var(--font-editorial);
-  font-size: 0.5rem;
+  font-size: 0.6375rem;
   font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: -0.005em;
   color: var(--color-brand-600);
   white-space: nowrap;
 }
@@ -174,6 +173,71 @@
   letter-spacing: -0.005em;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.5;
+}
+
+/* ── How it's different card ─────────────────────────────────────── */
+.diffContainer {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diffCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.diffLine {
+  font-family: var(--font-editorial);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1em;
+}
+
+.diffLine_query,
+.diffLine_brand,
+.diffLine_sub,
+.diffLine_dest {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: -0.01em;
+}
+
+.diffLine_arrow {
+  font-size: 1.05rem;
+  color: var(--color-brand-500);
+  opacity: 0.55;
+  justify-content: center;
+}
+
+.diffLine_spacer {
+  height: 0.6rem;
+  min-height: 0.6rem;
+}
+
+.diffCursor {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.9em;
+  background: var(--color-brand-500);
+  opacity: 0.8;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  flex-shrink: 0;
+  animation: diffBlink 1s step-end infinite;
+}
+
+@keyframes diffBlink {
+  0%, 100% { opacity: 0.8; }
+  50%       { opacity: 0; }
 }
 
 /* ── Timeline section ────────────────────────────────────────────── */
@@ -235,13 +299,10 @@
 
 .phaseVersion {
   font-family: var(--font-editorial);
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--color-brand-600);
-  border: 1px solid var(--color-brand-600);
-  padding: 0.12rem 0.4rem;
   flex-shrink: 0;
 }
 
@@ -320,10 +381,19 @@
   display: contents;
 }
 
-/* ── Line row: sits in grid row 2, spans all columns ── */
+/* ── Label row: sits in grid row 1, spans all columns ── */
+.stLabelRow {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Line row: sits in grid row 3, spans all columns ── */
 .stLineRow {
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 3;
   display: flex;
   position: relative;
   height: 1px;
@@ -347,15 +417,21 @@
 }
 
 .stSectionLabel {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-editorial);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.38);
   white-space: nowrap;
-  margin-bottom: 0.5rem;
-  align-self: flex-start;
+  background: #0b0b0b;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  min-height: 2.25rem;
+  margin-bottom: 1rem;
+  align-self: center;
 }
 
 .stDotCell {
@@ -369,13 +445,13 @@
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  width: 5px;
-  height: 5px;
-  border-radius: 0;
-  background: var(--color-brand-500);
+  transform: translate(-50%, -50%);
+  font-family: var(--font-editorial);
+  font-size: 0.85rem;
+  color: var(--color-brand-500);
   z-index: 2;
-  box-shadow: 0 0 8px rgba(210, 190, 155, 0.4);
+  line-height: 1;
+  user-select: none;
 }
 
 /* ── Top branch: feature callout (grid row 1) ── */
@@ -397,7 +473,7 @@
   left: 50%;
   width: 1px;
   height: 1.5rem;
-  background: linear-gradient(to bottom, transparent, rgba(210, 190, 155, 0.18));
+  background: linear-gradient(to bottom, transparent, rgba(210, 190, 155, 0.06));
 }
 
 /* ── Bottom branch: type label + infra (grid row 3) ── */
@@ -418,7 +494,7 @@
   left: 50%;
   width: 1px;
   height: 1.5rem;
-  background: linear-gradient(to bottom, rgba(210, 190, 155, 0.18), transparent);
+  background: linear-gradient(to bottom, rgba(210, 190, 155, 0.06), transparent);
 }
 
 /* Node identity: type badge + title */
@@ -432,13 +508,10 @@
 
 .stTypeTag {
   font-family: var(--font-editorial);
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--color-brand-600);
-  border: 1px solid var(--color-brand-600);
-  padding: 0.1rem 0.4rem;
   opacity: 0.75;
 }
 
@@ -510,15 +583,15 @@
   }
 
   .stActive .stLineRow::before {
-    animation: stLineReveal 2s cubic-bezier(0.25, 0, 0.35, 1) forwards;
+    animation: stLineReveal 4s cubic-bezier(0.25, 0, 0.35, 1) forwards;
   }
 
   .stDot {
-    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    opacity: 0;
   }
 
   .stActive .stDot {
-    animation: stDotPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: stDotPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: var(--st-delay, 0s);
   }
 
@@ -528,8 +601,8 @@
   }
 
   .stActive .stTopBranch {
-    animation: stBranchUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: calc(var(--st-delay, 0s) + 0.2s);
+    animation: stBranchUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--st-delay, 0s) + 0.35s);
   }
 
   .stTopBranch::after {
@@ -538,7 +611,7 @@
   }
 
   .stActive .stTopBranch::after {
-    animation: stStemReveal 0.3s ease forwards;
+    animation: stStemReveal 0.5s ease forwards;
     animation-delay: var(--st-delay, 0s);
   }
 
@@ -548,8 +621,8 @@
   }
 
   .stActive .stBottomBranch {
-    animation: stBranchDown 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: calc(var(--st-delay, 0s) + 0.2s);
+    animation: stBranchDown 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--st-delay, 0s) + 0.35s);
   }
 
   .stBottomBranch::before {
@@ -558,7 +631,7 @@
   }
 
   .stActive .stBottomBranch::before {
-    animation: stStemReveal 0.3s ease forwards;
+    animation: stStemReveal 0.5s ease forwards;
     animation-delay: var(--st-delay, 0s);
   }
 }
@@ -568,7 +641,7 @@
 }
 
 @keyframes stDotPop {
-  to { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+  to { opacity: 1; }
 }
 
 @keyframes stBranchUp {
@@ -585,13 +658,36 @@
 
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 860px) {
+  /* Standardize section spacing */
+  .missionSection,
+  .infraSection,
+  .timelineSection {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 0;
+  }
+
   /* Section-level stacking */
   .missionSection {
     grid-template-columns: 1fr;
   }
 
+  /* Move SystemOverview below the text block */
+  .missionRight {
+    order: 2;
+    margin-top: 2.5rem;
+  }
+
+  .missionLeft {
+    order: 1;
+  }
+
   .infraSection {
     grid-template-columns: 1fr;
+  }
+
+  .stackPanel {
+    order: 2;
   }
 
   .timelineGrid {
@@ -609,6 +705,14 @@
     gap: 0.625rem;
     padding: 1rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.055);
+  }
+
+  .stRoot > div:nth-child(3) {
+    border-top: none;
+  }
+
+  .stLabelRow {
+    display: none;
   }
 
   .stLineRow {
@@ -633,5 +737,17 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.125rem;
+  }
+
+  /* Shrink flow animation */
+  .diffLine_query,
+  .diffLine_brand,
+  .diffLine_sub,
+  .diffLine_dest {
+    font-size: 0.75rem;
+  }
+
+  .diffLine_arrow {
+    font-size: 0.75rem;
   }
 }

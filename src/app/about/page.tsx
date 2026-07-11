@@ -2,6 +2,7 @@
 import AsciiBackground from '@/components/AsciiBackground';
 import SystemOverview from '@/components/SystemOverview';
 import SearchTimeline from './SearchTimeline';
+import HowItsDifferentCard from './HowItsDifferentCard';
 import homeStyles from '../page.module.css';
 import styles from './about.module.css';
 
@@ -19,7 +20,7 @@ const TIMELINE = [
   {
     version: 'v1',
     label: 'current',
-    title: 'Directory & Discovery',
+    title: 'directory & discovery',
     status: 'live',
     items: [
       'Organized index of ~250 open-source tools',
@@ -34,7 +35,7 @@ const TIMELINE = [
   {
     version: 'v2',
     label: 'next',
-    title: 'Community Layer',
+    title: 'community layer',
     status: 'planned',
     items: [
       'User accounts with bookmarks, saved tools, and collections',
@@ -49,7 +50,7 @@ const TIMELINE = [
   {
     version: 'v3',
     label: 'future',
-    title: 'Open Hub',
+    title: 'open hub',
     status: 'planned',
     items: [
       'Forums and discussion threads per tool',
@@ -88,7 +89,12 @@ export default function AboutPage() {
         {/* ── Mission ──────────────────────────────────────────── */}
         <section className={styles.missionSection}>
 
-          {/* Left: text */}
+          {/* Left: system overview visualization */}
+          <div className={styles.missionRight}>
+            <SystemOverview />
+          </div>
+
+          {/* Right: text */}
           <div className={styles.missionLeft}>
             <h1 className={styles.missionHeading}>
               Great software shouldn&apos;t be hidden.
@@ -122,31 +128,33 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Right: system overview visualization */}
-          <div className={styles.missionRight}>
-            <SystemOverview />
-          </div>
+        </section>
 
+        {/* ── How it's different ───────────────────────────────── */}
+        <section className={styles.infraSection}>
+          <div className={styles.infraLeft}>
+            <h2 className={styles.infraHeading}>How it&apos;s different.</h2>
+            <p className={styles.infraBody}>
+              OpenFinder is not a package manager, app store, or installer. It does not try to own the install step. It tries to make the choice before installation clearer.
+            </p>
+            <p className={styles.infraBody}>
+              Package managers help you install software. App stores help you browse installable apps. OpenFinder helps you sort through options and choose the right tool.
+            </p>
+            <p className={styles.infraBody}>
+              That means OpenFinder stays hands-off. It does not become the distribution path. It does not install, update, wrap, or manage the software it lists. It doesn&apos;t ask users to keep another app running or stay within its interface once they&apos;ve chosen a tool. It points, explains, organizes, and gets out of the way.
+            </p>
+            <p className={styles.infraBody}>
+              Open-source software is distributed by nature. Some projects live on GitHub. Some use their own websites. Some ship through F-Droid, Docker, Homebrew, Linux repositories, direct downloads, or self-hosted deployments. OpenFinder respects that distributed model instead of trying to collapse it into one install path.
+            </p>
+            <p className={styles.infraBody}>
+              The goal is simple: help people find the right tool, understand the tradeoffs, and then install it through the method that makes sense for that project.
+            </p>
+          </div>
+          <HowItsDifferentCard />
         </section>
 
         {/* ── How it's built ───────────────────────────────────── */}
         <section className={styles.infraSection}>
-          <div className={styles.infraLeft}>
-            <h2 className={styles.infraHeading}>How it&apos;s built.</h2>
-            <p className={styles.infraBody}>
-              OpenFinder is a Next.js app written in TypeScript, styled with CSS
-              Modules, and deployed on Vercel. The tool directory is backed by Supabase,
-              a PostgreSQL database seeded from structured CSV files via a custom script.
-              The animated ASCII canvas is a hand-rolled canvas renderer that runs
-              entirely client-side.
-            </p>
-            <p className={styles.infraBody}>
-              Everything is open source. The full architecture, data schema, and
-              contribution guide are documented on the docs page.
-            </p>
-            <a href="/docs" className={styles.infraLink}>read the docs →</a>
-          </div>
-
           <div className={styles.stackPanel}>
             <div className={styles.stackPanelHeader}>
               <span className={styles.stackPanelTitle}>stack</span>
@@ -161,10 +169,26 @@ export default function AboutPage() {
               ['source',     'GitHub — fully open source, MIT license'],
             ].map(([key, val]) => (
               <div key={key} className={styles.stackRow}>
-                <span className={styles.stackKey}>{key}</span>
+                <span className={styles.stackKey}>{key}:</span>
                 <span className={styles.stackVal}>{val}</span>
               </div>
             ))}
+          </div>
+
+          <div className={styles.infraLeft}>
+            <h2 className={styles.infraHeading}>How it&apos;s built.</h2>
+            <p className={styles.infraBody}>
+              OpenFinder is a Next.js app written in TypeScript, styled with CSS
+              Modules, and deployed on Vercel. The tool directory is backed by Supabase,
+              a PostgreSQL database seeded from structured CSV files via a custom script.
+              The animated ASCII canvas is a hand-rolled canvas renderer that runs
+              entirely client-side.
+            </p>
+            <p className={styles.infraBody}>
+              Everything is open source. The full architecture, data schema, and
+              contribution guide are documented on the docs page.
+            </p>
+            <a href="/docs" className={styles.infraLink}>read the docs →</a>
           </div>
         </section>
 

@@ -5,8 +5,8 @@ import styles from './about.module.css';
 
 const NODES = [
   {
-    type: "Layer 1",
-    title: "Advanced catalog search",
+    type: "layer_1:",
+    title: "advanced catalog search",
     features: [
       "Taxonomy-aware ranking across tools, categories, tags, platforms, and descriptions.",
     ],
@@ -15,8 +15,8 @@ const NODES = [
     ],
   },
   {
-    type: "Layer 2",
-    title: "Intent-aware search",
+    type: "layer_2:",
+    title: "intent-aware search",
     features: [
       `Aliases and use-case metadata translate common phrases and "alternative to" searches into OpenFinder's taxonomy.`,
     ],
@@ -25,8 +25,8 @@ const NODES = [
     ],
   },
   {
-    type: "Layer 3",
-    title: "Database-backed search",
+    type: "layer_3:",
+    title: "database-backed search",
     features: [
       "Postgres handles full-text search, fuzzy matching, indexing, ranking, and pagination as the catalog grows.",
     ],
@@ -35,8 +35,8 @@ const NODES = [
     ],
   },
   {
-    type: "Layer 4",
-    title: "Dedicated search engine",
+    type: "layer_4:",
+    title: "dedicated search engine",
     features: [
       "A specialized search layer adds instant search, stronger typo tolerance, facets, synonyms, ranking controls, and analytics.",
     ],
@@ -64,15 +64,20 @@ export default function SearchTimeline() {
   return (
     <div ref={ref} className={`${styles.stRoot} ${active ? styles.stActive : ''}`}>
 
-      {/* Line row: grid-row 2, spans all 4 columns */}
+      {/* Label row: grid-row 1, spans all 4 columns, centered */}
+      <div className={styles.stLabelRow}>
+        <span className={styles.stSectionLabel}>search roadmap</span>
+      </div>
+
+      {/* Line row: grid-row 3, spans all 4 columns */}
       <div className={styles.stLineRow}>
         {NODES.map((node, i) => (
           <div
             key={node.type}
             className={styles.stDotCell}
-            style={{ '--st-delay': `${i * 0.5}s` } as React.CSSProperties}
+            style={{ '--st-delay': `${i * 0.9}s` } as React.CSSProperties}
           >
-            <div className={styles.stDot} />
+            <span className={styles.stDot}>×</span>
           </div>
         ))}
       </div>
@@ -81,16 +86,15 @@ export default function SearchTimeline() {
       {NODES.map((node, i) => (
         <div key={node.type} className={styles.stCol}>
 
-          {/* Top branch: feature callout — placed in grid row 1 (desktop only) */}
+          {/* Top branch: feature callout — placed in grid row 2 (desktop only) */}
           <div
             className={styles.stTopBranch}
             style={{
-              '--st-delay': `${i * 0.5}s`,
+              '--st-delay': `${i * 0.9}s`,
               gridColumn: i + 1,
-              gridRow: 1,
+              gridRow: 2,
             } as React.CSSProperties}
           >
-            {i === 0 && <span className={styles.stSectionLabel}>SEARCH ROADMAP</span>}
             <ul className={styles.stItems}>
               {node.features.map((f) => (
                 <li key={f} className={styles.stItem}>
@@ -101,13 +105,13 @@ export default function SearchTimeline() {
             </ul>
           </div>
 
-          {/* Bottom branch: type label + infra — placed in grid row 3 (desktop only) */}
+          {/* Bottom branch: type label + infra — placed in grid row 4 (desktop only) */}
           <div
             className={styles.stBottomBranch}
             style={{
-              '--st-delay': `${i * 0.5}s`,
+              '--st-delay': `${i * 0.9}s`,
               gridColumn: i + 1,
-              gridRow: 3,
+              gridRow: 4,
             } as React.CSSProperties}
           >
             <div className={styles.stNodeId}>
@@ -126,7 +130,7 @@ export default function SearchTimeline() {
 
           {/* Mobile card: type+title on same line, then feature, then infra */}
           <div className={styles.stMobileCard}>
-            {i === 0 && <span className={styles.stSectionLabel}>SEARCH ROADMAP</span>}
+            {i === 0 && <span className={styles.stSectionLabel}>search roadmap</span>}
             <div className={styles.stMobileHeader}>
               <span className={styles.stTypeTag}>{node.type}</span>
               <span className={styles.stNodeTitle}>{node.title}</span>
